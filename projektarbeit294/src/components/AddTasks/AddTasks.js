@@ -5,7 +5,7 @@ export default {
             createTaskName: null,
             inputData: { title: this.createTaskName },
             infos: [],
-            loggedIn: Boolean(localStorage.getItem("loggedIn"))
+            loggedIn: JSON.parse(localStorage.getItem("loggedIn"))
         }
     },
     methods: {
@@ -32,6 +32,6 @@ export default {
         },
     },        
     watch: {
-        loggedIn: () => Boolean(localStorage.getItem("loggedIn"))   
+        loggedIn: () => JSON.parse(localStorage.getItem("loggedIn"))   
     }
 }

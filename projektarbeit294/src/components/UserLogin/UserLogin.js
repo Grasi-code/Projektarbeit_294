@@ -5,7 +5,7 @@ export default {
             loginEmail: "",
             loginPassword: "",
             infos: [],
-            loggedIn: true
+            loggedIn: JSON.parse(localStorage.getItem("loggedIn")),
         }
     },
     methods: {
@@ -21,6 +21,7 @@ export default {
                     this.loggedIn = true
                     localStorage.setItem("token", res.token)
                     localStorage.setItem("loggedIn", true)
+                    window.location.reload()
                 })
                 .catch(() => alert("failed"))
             }else{
@@ -36,6 +37,8 @@ export default {
                     localStorage.setItem("token", undefined)
                     this.loggedIn = false
                     localStorage.setItem("loggedIn", false)
+                    
+                    window.location.reload();
                 });
         }
     },

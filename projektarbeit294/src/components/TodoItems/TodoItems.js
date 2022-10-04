@@ -4,7 +4,7 @@ export default {
         return {
             infos: [],
             updating: null,
-            loggedIn: Boolean(localStorage.getItem("loggedIn")),
+            loggedIn: JSON.parse(localStorage.getItem("loggedIn")),
             userUpdateInput: ""
         }
     },
@@ -13,7 +13,6 @@ export default {
             return str.trim().length === 0;
         },
         getInfos: function() {
-            this.loggedIn = Boolean(localStorage.getItem("loggedIn"))
             fetch('http://127.0.0.1:3000/auth/jwt/tasks', { 
                 credentials: 'include', 
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem("token")}`} })

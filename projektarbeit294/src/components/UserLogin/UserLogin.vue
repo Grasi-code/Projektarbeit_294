@@ -12,8 +12,6 @@
         </div>
     </div>
     <button class="btn btn-secondary" v-else @click="userLogout()">Logout</button>
-
-    <input type="text" v-model="loggedIn">
 </template>
 
 <script lang="js" src="../UserLogin/UserLogin.js">

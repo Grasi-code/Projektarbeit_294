@@ -12,7 +12,7 @@ export default {
         onlySpaces: function(str) {
             return str.trim().length === 0;
         },
-        tasksPost: function() {
+        tasksPost: function() { //function for adding a task
             if(this.onlySpaces(this.createTaskName) == false && this.createTaskName.length != 0){
                 fetch('http://127.0.0.1:3000/auth/jwt/tasks', { 
                     method: 'post', body: JSON.stringify({ title: this.createTaskName }), 
@@ -31,7 +31,7 @@ export default {
             }
         },
     },        
-    watch: {
+    watch: { // to see if the user is logged in
         loggedIn: () => JSON.parse(localStorage.getItem("loggedIn"))   
     }
 }

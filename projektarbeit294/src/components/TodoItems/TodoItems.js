@@ -12,7 +12,7 @@ export default {
         onlySpaces: function(str) {
             return str.trim().length === 0;
         },
-        getInfos: function() {
+        getInfos: function() { //function for if the user is logged in
             fetch('http://127.0.0.1:3000/auth/jwt/tasks', { 
                 credentials: 'include', 
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem("token")}`} })
@@ -26,7 +26,7 @@ export default {
                     this.infos = data;
                 })
         },
-        tasksDelete: function(id, title) {
+        tasksDelete: function(id, title) { //fnction for deleting a task
             fetch('http://127.0.0.1:3000/auth/jwt/task/' + id, { 
                 credentials: 'include', 
                 method: 'delete',
@@ -37,7 +37,7 @@ export default {
                     window.location.reload();
                 })
         },
-        tasksUpdate: function(id) {
+        tasksUpdate: function(id) { //function for updating a task
             if(this.onlySpaces(this.userUpdateInput) == false && this.userUpdateInput.length != 0){
                 fetch('http://127.0.0.1:3000/tasks', {
                     method: 'put',

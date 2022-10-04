@@ -9,7 +9,7 @@ export default {
         }
     },
     methods: {
-        userLogin: function() {
+        userLogin: function() { //function for userLogin, I made the api call with jwp
             if(this.loginPassword === 'm294'){
                 fetch('http://127.0.0.1:3000/auth/jwt/sign', { 
                     credentials: "include",
@@ -28,7 +28,7 @@ export default {
                 alert("Wrong Password")
             }
         },
-        userLogout: function() {
+        userLogout: function() { //function for Login out
             fetch('http://127.0.0.1:3000/auth/cookie/logout', { 
                 credentials: "include", 
                 method: "post", body: JSON.stringify({ email: this.loginEmail, password: this.loginPassword }), 

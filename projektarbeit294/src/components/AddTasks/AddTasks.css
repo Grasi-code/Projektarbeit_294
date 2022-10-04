@@ -1,0 +1,17 @@
+body {
+    background-color: white;
+}
+
+.form-control{
+    width: 50%;
+    margin-left: 25%
+}
+
+* {
+    font-family: 'Arial';
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    
+}

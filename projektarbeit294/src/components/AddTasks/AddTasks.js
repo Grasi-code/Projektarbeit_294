@@ -5,16 +5,19 @@ export default {
             createTaskName: null,
             inputData: { title: this.createTaskName },
             infos: [],
-            loggedIn: null
+            loggedIn: Boolean(localStorage.getItem("loggedIn"))
         }
     },
     methods: {
-        onlySpaces: function(str){
+        onlySpaces: function(str) {
             return str.trim().length === 0;
         },
-        taskPost: function(){
+        tasksPost: function() {
             if(this.onlySpaces(this.createTaskName) == false && this.createTaskName.length != 0){
-                fetch('http://127.0.0.1:3000/auth/cookie/tasks', { credentials: 'include', method: 'post', body: JSON.stringify({ title: this.createTaskName }), headers: { 'Content-Type': 'application/json', } })
+                fetch('http://127.0.0.1:3000/auth/jwt/tasks', { 
+                    method: 'post', body: JSON.stringify({ title: this.createTaskName }), 
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem("token")}`
+                } })
                 .then((res) => res.json())
                 .then((data) => {
                     this.infos = data;
@@ -22,13 +25,13 @@ export default {
                     alert("Aufgabe wurde hinzugefügt")
                     window.location.reload()
                 });
-            }
-            else{
-                alert("Aufgabenname ist nicht gültig")
+            }else{
+                alert("Ungültiger Name")
+
             }
         },
-    },
-    created: function(){
-        this.loggedIn = localStorage.getItem("loggedIn")
+    },        
+    watch: {
+        loggedIn: () => Boolean(localStorage.getItem("loggedIn"))   
     }
 }

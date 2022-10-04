@@ -1,42 +1,42 @@
-export default{
-    name: 'UserLogins',
-    data(){
-        return{
-            loginemail: "",
+export default {
+    name: 'UserLogin',
+    data() {
+        return {
+            loginEmail: "",
             loginPassword: "",
             infos: [],
-            loggedIn: localStorage.getItem("loggedIn")
+            loggedIn: true
         }
     },
     methods: {
-        userLogin: function(){
+        userLogin: function() {
             if(this.loginPassword === 'm294'){
-                fetch('http://127.0.0.1:3000/auth/cookie/login', { credentials: "include", method: "post", body: JSON.stringify({ email: this.loginEmail, password: this.loginPassword }), headers: { 'Content-Type': 'application/json', } })
+                fetch('http://127.0.0.1:3000/auth/jwt/sign', { 
+                    credentials: "include",
+                    method: "post", 
+                    body: JSON.stringify({ email: this.loginEmail, password: this.loginPassword }), 
+                    headers: { 'Content-Type': 'application/json', } })
+                .then((res) => res.json())
                 .then((res) => {
-                    console.log("Successfully logged in")
-                    window.location.reload()
-                    if (res.status !== 200){
-                        return
-                    }
-                    else {
-                        localStorage.setItem("loggedIn", true)
-                        this.loggedIn = localStorage.getitem("loggedIn")
-                    }
+                    this.loggedIn = true
+                    localStorage.setItem("token", res.token)
+                    localStorage.setItem("loggedIn", true)
                 })
-            }
-            else{
-                alert("Falsches Passwort")
+                .catch(() => alert("failed"))
+            }else{
+                alert("Wrong Password")
             }
         },
-        userLogout: function(){
-            fetch('http://127.0.0.1:3000/auth/cookie/logout', { credentials: "include", method: "post", body: JSON.stringify({ email: this.loginEmail, password: this.loginPassword }), headers: { 'Content-Type': 'application/json', } })
-            .then(() => {
-                console.log("Successfully logged out")
-                localStorage.setItem("loggedIn", false)
-                this.loggedIn = localStorage.getItem("loggedIn")
-                console.log(this.loggedIn)
-                window.location.reload()
-            });
+        userLogout: function() {
+            fetch('http://127.0.0.1:3000/auth/cookie/logout', { 
+                credentials: "include", 
+                method: "post", body: JSON.stringify({ email: this.loginEmail, password: this.loginPassword }), 
+                headers: { 'Content-Type': 'application/json', } })
+                .then(() => {
+                    localStorage.setItem("token", undefined)
+                    this.loggedIn = false
+                    localStorage.setItem("loggedIn", false)
+                });
         }
-    }
+    },
 }

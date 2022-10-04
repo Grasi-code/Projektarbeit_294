@@ -1,27 +1,29 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <AddTask/>
+  <div>
+    <div class="page">
+      <AddTasks/>
+      <TodoItems></TodoItems>
+    </div>
+    <UserLogin></UserLogin>
+  </div>
 </template>
 
 <script>
-import AddTask from './components/AddTask/AddTask.vue';
-
-
+import AddTasks from '@/components/AddTasks/AddTasks.vue';
+import TodoItems from '@/components/TodoItems/TodoItems.vue';
+import UserLogin from '@/components/UserLogin/UserLogin.vue';
 export default {
   name: 'App',
   components: {
-    AddTask
+    AddTasks,
+    TodoItems,
+    UserLogin
 }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body{
+    text-align: center;
+  }
 </style>

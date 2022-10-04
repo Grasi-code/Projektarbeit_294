@@ -1,17 +1,17 @@
 <template>
-    <div v-if="loggedIn !== 'true'" class="containerLogin">
+    <div v-if="!loggedIn" class="containerLogin">
         <h1>Login TodoApp</h1>
         <div @submit="userLogin()" class="loginInput">
             <form @submit.prevent>
-                <input type="email" placeholder="E-mail" v-model="loginEmail">
+                <input type="email" class="form-control" placeholder="E-mail" v-model="loginEmail">
                 <br>
-                <input type="passwort" placeholder="Passwort" v-model="loginPassword">
+                <input type="passwort" class="form-control" placeholder="Passwort" v-model="loginPassword">
                 <br>
-                <input type="submit" value="Login"/>
+                <input class="btn btn-primary" type="submit" value="Login"/>
             </form>
         </div>
     </div>
-    <button v-else @click="userLogout()">Logout</button>
+    <button class="btn btn-secondary" v-else @click="userLogout()">Logout</button>
 </template>
 
 <script lang="js" src="../UserLogin/UserLogin.js">

@@ -1,5 +1,15 @@
 # projektarbeit294
 
+##Projekt
+Eine Todo Webapplikation mit Login in der man Aufgaben hinzufügen und löschen kann. 
+
+Login Data:
+```
+Email: 'example@example.ch'
+
+Password: 'm294'
+```
+
 ## Project setup
 ```
 npm install

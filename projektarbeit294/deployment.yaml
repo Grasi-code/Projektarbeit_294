@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projektarbeit294-deployment
+  labels:
+    app: projektarbeit294
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projektarbeit294
+  template:
+    metadata:
+      labels:
+        app: projektarbeit294
+    spec:
+      containers:
+      - name: projektarbeit294
+        image: ghcr.io/grasi-code/projektarbeit294:v3:latest
+        ports:
+        - containerPort: 8080
+        env: 
+          - name: npm_config_cache
+            value: ./.npm-chache
+          - name: NODE_ENV
+            value: production
+    
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: projektarbeit294
+  name: projektarbeit294
+spec:
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: projektarbeit294
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: projektarbeit294
+  name: projektarbeit294
+spec:
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: projektarbeit294
+  tls:
+    termination: edge   
+    insecureEdgeTerminationPolicy: Redirect
